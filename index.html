@@ -1,33 +1,17 @@
+<!DOCTYPE html>
 <html>
 <head>
-  <!-- Required Frame meta tags -->
-  <meta property="fc:frame" content="vNext">
-  <meta property="fc:frame:image" content="http://your-server/game-state-image?user=123">
-  <meta property="fc:frame:post_url" content="http://your-server/game-handler">
-  
-  <!-- Frame buttons -->
-  <meta property="fc:frame:button:1" content="Jump (Space)">
-  <meta property="fc:frame:button:2" content="Restart">
-  
-  <!-- Original Dino game logic -->
-  <script>
-    // Preserve game logic but modify input handling
-    const handleJump = () => {
-      if (!tRex.jumping) {
-        tRex.startJump();
-      }
-    };
+    <!-- Open Graph tags for social preview -->
+    <meta property="og:title" content="My Frame">
+    <meta property="og:image" content="https://your-username.github.io/repo/image.png">
 
-    const handleRestart = () => {
-      Runner.instance_.restart();
-    };
-  </script>
+    <!-- Farcaster Frame tags -->
+    <meta property="fc:frame" content="vNext">
+    <meta property="fc:frame:image" content="https://your-username.github.io/repo/image.png">
+    <meta property="fc:frame:button:1" content="Click Me">
+    <meta property="fc:frame:post_url" content="https://your-server.vercel.app/api/post">
 </head>
-
 <body>
-  <!-- Canvas remains but will be captured as image -->
-  <div class="runner-container">
-    <canvas class="runner-canvas" width="600" height="150"></canvas>
-  </div>
+    <h1>Hello Farcaster!</h1>
 </body>
 </html>
