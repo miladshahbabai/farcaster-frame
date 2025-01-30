@@ -1,17 +1,31 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <!-- Required Farcaster Tags -->
-  <meta property="fc:frame" content="vNext">
-  <meta property="fc:frame:image" content="YOUR_IMAGE_URL">
-  <meta property="fc:frame:button:1" content="Click Me">
-
-  <!-- Optional Open Graph Tags (for social sharing) -->
-  <meta property="og:title" content="My Free Farcaster Frame">
-  <meta property="og:image" content="https://github.com/miladshahbabai/farcaster-frame/blob/main/pixel_game.gif">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dino Game</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Farcaster meta tags -->
+    <meta name="fc:frame" content='{
+      "version": "next",
+      "imageUrl": "https://example.com/img/start.png",
+      "button": {
+        "title": "Play Dino Game",
+        "action": {
+          "type": "launch_frame",
+          "name": "Dino Game",
+          "url": "https://example.com/dino-game",
+          "splashImageUrl": "https://example.com/img/splash.png",
+          "splashBackgroundColor": "#ffffff"
+        }
+      }
+    }' />
 </head>
 <body>
-  <!-- Fallback content (non-Farcaster users will see this) -->
-  <h1>Welcome to my Frame!</h1>
+    <div class="game-container">
+        <div class="dino"></div>
+        <div class="obstacle"></div>
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>
