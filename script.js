@@ -1,69 +1,27 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const dino = document.querySelector('.dino');
-    const obstacle = document.querySelector('.obstacle');
+const express = require('express');
+const app = express();
+const port = 3000;
 
-    let isJumping = false;
-    let gravity = 0.9;
-    let isGameOver = false;
+// Serve HTML frame
+app.get('/', (req, res) => {
+  res.sendFile(__dirname + '/index.html');
+});
 
-    function control(e) {
-        if (e.keyCode === 32) {
-            if (!isJumping) {
-                isJumping = true;
-                jump();
-            }
-        }
-    }
+// Handle interactions
+app.post('/interact', (req, res) => {
+  const responseHtml = `
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <meta property="fc:frame" content="vNext">
+      <meta property="fc:frame:image" content="https://via.placeholder.com/600x600?text=Clicked!">
+      <meta property="fc:frame:button:1" content="Thanks!">
+    </head>
+    </html>
+  `;
+  res.send(responseHtml);
+});
 
-    document.addEventListener('keydown', control);
-
-    function jump() {
-        let position = 0;
-        let timerId = setInterval(() => {
-            // move up
-            if (position >= 150) {
-                clearInterval(timerId);
-                // move down
-                let downTimerId = setInterval(() => {
-                    if (position <= 0) {
-                        clearInterval(downTimerId);
-                        isJumping = false;
-                    }
-                    position -= 5;
-                    position = position * gravity;
-                    dino.style.bottom = position + 'px';
-                }, 20);
-            }
-            position += 30;
-            position = position * gravity;
-            dino.style.bottom = position + 'px';
-        }, 20);
-    }
-
-    function generateObstacle() {
-        let obstaclePosition = 800;
-        let randomTime = Math.random() * 4000;
-
-        if (isGameOver) return;
-        
-        obstacle.style.left = obstaclePosition + 'px';
-        
-        let timerId = setInterval(() => {
-            if (obstaclePosition > 0 && obstaclePosition < 60 && dino.style.bottom === '0px') {
-                clearInterval(timerId);
-                alert('Game Over');
-                isGameOver = true;
-                // remove all children
-                while (gameContainer.firstChild) {
-                    gameContainer.removeChild(gameContainer.lastChild);
-                }
-            }
-            obstaclePosition -= 10;
-            obstacle.style.left = obstaclePosition + 'px';
-        }, 20);
-
-        setTimeout(generateObstacle, randomTime);
-    }
-
-    generateObstacle();
+app.listen(port, () => {
+  console.log(`Server running at http://localhost:${port}`);
 });
